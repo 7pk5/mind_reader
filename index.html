@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Mind Reader Game with Calculator 🧠</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Mind Reader Game with Calculator 🧠</h1>
+            <p>Let's play a smart mind game! Follow the steps carefully and I'll show you a math magic trick.</p>
+            <div class="calculator-toggle">
+                <button id="toggleCalc" class="toggle-button" onclick="toggleCalculator()">
+                    🧮 Show Calculator
+                </button>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h2>🧮 Your Private Calculator</h2> 
+            <div class="calculator-info">
+                This calculator runs fully in your browser — I can't see your inputs!
+            </div>
+            <div class="calculator">
+                <input type="text" id="display" class="display" readonly>
+                <div class="button-row">
+                    <button class="calc-button number" onclick="appendValue('7')">7</button>
+                    <button class="calc-button number" onclick="appendValue('8')">8</button>
+                    <button class="calc-button number" onclick="appendValue('9')">9</button>
+                    <button class="calc-button operator" onclick="appendValue('/')">÷</button>
+                </div>
+                <div class="button-row">
+                    <button class="calc-button number" onclick="appendValue('4')">4</button>
+                    <button class="calc-button number" onclick="appendValue('5')">5</button>
+                    <button class="calc-button number" onclick="appendValue('6')">6</button>
+                    <button class="calc-button operator" onclick="appendValue('*')">×</button>
+                </div>
+                <div class="button-row">
+                    <button class="calc-button number" onclick="appendValue('1')">1</button>
+                    <button class="calc-button number" onclick="appendValue('2')">2</button>
+                    <button class="calc-button number" onclick="appendValue('3')">3</button>
+                    <button class="calc-button operator" onclick="appendValue('-')">−</button>
+                </div>
+                <div class="button-row">
+                    <button class="calc-button number" onclick="appendValue('0')">0</button>
+                    <button class="calc-button clear" onclick="clearDisplay()">C</button>
+                    <button class="calc-button equals" onclick="calculate()">=</button>
+                    <button class="calc-button operator" onclick="appendValue('+')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div class="completed-steps" id="completedSteps"></div>
+
+            <div id="gameContent">
+                <!-- Steps will be dynamically generated here -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Built by PK with ❤️ using HTML, CSS & JavaScript</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

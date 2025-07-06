@@ -1,0 +1,536 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Mono', 'Times New Roman', serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    color: #2c3e50;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    min-height: 100vh;
+    transition: grid-template-columns 0.3s ease;
+}
+
+.container.calculator-hidden {
+    grid-template-columns: 1fr;
+}
+
+.header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f8f9fa;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+
+.calculator-toggle {
+    margin-top: 15px;
+}
+
+.toggle-button {
+    background: #3498db;
+    color: white;
+    border: 2px solid #2980b9;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.toggle-button:active {
+    transform: translateY(0);
+}
+
+/* Calculator Styles */
+.calculator-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    display: none; /* Hidden by default */
+}
+
+.calculator-section.show {
+    display: block;
+}
+
+.calculator-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+.calculator-info {
+    background: #ecf0f1;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #34495e;
+    text-align: center;
+}
+
+.calculator {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.display {
+    width: 100%;
+    height: 60px;
+    background: #ffffff;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 1.6em;
+    text-align: right;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.button-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.calc-button {
+    flex: 1;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid transparent;
+}
+
+.calc-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.calc-button:active {
+    transform: translateY(0);
+}
+
+.calc-button.number {
+    background: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+
+.calc-button.number:hover {
+    background: #2980b9;
+}
+
+.calc-button.operator {
+    background: #34495e;
+    color: white;
+    border-color: #2c3e50;
+}
+
+.calc-button.operator:hover {
+    background: #2c3e50;
+}
+
+.calc-button.equals {
+    background: #e67e22;
+    color: white;
+    border-color: #d35400;
+}
+
+.calc-button.equals:hover {
+    background: #d35400;
+}
+
+.calc-button.clear {
+    background: #e74c3c;
+    color: white;
+    border-color: #c0392b;
+}
+
+.calc-button.clear:hover {
+    background: #c0392b;
+}
+
+/* Game Section Styles */
+.game-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: max-width 0.3s ease;
+}
+
+.container.calculator-hidden .game-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #ecf0f1;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    border: 1px solid #bdc3c7;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.step-card {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 30px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.step-card.active {
+    transform: translateY(0);
+    opacity: 1;
+    border-color: #3498db;
+}
+
+.step-card.completed {
+    background: #d5f4e6;
+    border-color: #27ae60;
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.step-icon {
+    font-size: 2.5em;
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 12px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #bdc3c7;
+}
+
+.step-info h3 {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-weight: 400;
+}
+
+.step-number {
+    background: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.step-instruction {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #34495e;
+}
+
+.step-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.step-button {
+    background: #3498db;
+    color: white;
+    border: 2px solid #2980b9;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.step-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.step-button.primary {
+    background: #27ae60;
+    border-color: #219a52;
+}
+
+.step-button.primary:hover {
+    background: #219a52;
+}
+
+.step-button.secondary {
+    background: #95a5a6;
+    border-color: #7f8c8d;
+}
+
+.step-button.secondary:hover {
+    background: #7f8c8d;
+}
+
+.answer-input {
+    background: #ffffff;
+    color: #2c3e50;
+    border: 2px solid #bdc3c7;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    width: 150px;
+    font-family: 'Courier New', monospace;
+}
+
+.answer-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.error-message {
+    background: #e74c3c;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #c0392b;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.completed-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.completed-step {
+    background: #27ae60;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.reveal-card {
+    background: #f8f9fa;
+    border: 2px solid #27ae60;
+    color: #2c3e50;
+    text-align: center;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.reveal-title {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-weight: 400;
+}
+
+.reveal-result {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin: 30px 0;
+    color: #27ae60;
+    font-family: 'Courier New', monospace;
+}
+
+.magic-explanation {
+    background: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.magic-explanation h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.magic-explanation p {
+    margin-bottom: 10px;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .calculator-section {
+        position: relative;
+        top: 0;
+        order: 1;
+    }
+    
+    .game-section {
+        order: 2;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .game-section {
+        padding: 20px;
+    }
+
+    .step-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .step-icon {
+        font-size: 2.5em;
+        width: 70px;
+        height: 70px;
+    }
+
+    .step-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    .game-section {
+        padding: 15px;
+    }
+
+    .step-card {
+        padding: 20px;
+    }
+
+    .step-icon {
+        font-size: 2em;
+        width: 60px;
+        height: 60px;
+    }
+
+    .reveal-title {
+        font-size: 1.8em;
+    }
+
+    .reveal-result {
+        font-size: 2.5em;
+    }
+}
+
+.footer {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9em;
+}
