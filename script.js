@@ -15,7 +15,7 @@
             5: "How many fingers on one hand?",
             2: "How many eyes does a normal human have?",
             1: "How many noses does a normal human have?",
-            9: "How many planets are there in the solar system (excluding Pluto)?"
+            8: "How many planets are there in the solar system (excluding Pluto)?"
         };
 
         // Calculator toggle function
